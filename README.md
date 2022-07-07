@@ -14,9 +14,9 @@ Some of the test programs require [OpenSSL](https://openssl.org). If the OpenSSL
 
 For example, on macOS you can install OpenSSL via [Homebrew](https://brew.sh) by running
 ```sh
-brew install openssl
+brew install openssl pkg-config
 ```
-Then, run
+Run the following if you choose *not* to install `pkg-config`
 ```sh
 export CFLAGS="-I/usr/local/opt/openssl@1.1/include"
 export NISTFLAGS="-I/usr/local/opt/openssl@1.1/include"
@@ -26,15 +26,15 @@ before compilation to add the OpenSSL header and library locations to the respec
 
 ### Test programs
 
-To compile the test programs on Linux or macOS, go to the `ref/` or `avx2/` directory and run
+To compile the test programs on Linux or macOS, run
 ```sh
 make
 ```
 This produces the executables
 ```sh
-test/test_dilithium$ALG
-test/test_vectors$ALG
-PQCgenKAT_sign$ALG
+build/test/test_dilithium$ALG
+build/test/test_vectors$ALG
+build/PQCgenKAT_sign$ALG
 ```
 where `$ALG` ranges over the parameter sets 2, 3, 5, 2aes, 3aes, and 5aes.
 
@@ -87,7 +87,7 @@ All global symbols in the libraries lie in the namespaces `pqcrystals_dilithium$
 
 Also available is a portable [cmake](https://cmake.org) based build system that permits building the reference implementation.
 
-By calling 
+By calling
 ```
 mkdir build && cd build && cmake .. && cmake --build . && ctest
 ```
